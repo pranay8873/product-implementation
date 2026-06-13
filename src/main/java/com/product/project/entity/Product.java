@@ -18,4 +18,5 @@ public class Product {
     private String image;
     private int quantity;
     private double discount;
+
 }
