@@ -1,4 +1,4 @@
-package com.example.demo.exception;
+package spring.product.example.exception;
 
 public class ProductExistsException extends RuntimeException {
     public ProductExistsException(String message) {

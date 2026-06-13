@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package spring.product.example.service;
 
 import com.example.demo.model.product;
 import spring.product.example.model.Product;

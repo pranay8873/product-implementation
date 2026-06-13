@@ -1,4 +1,4 @@
-package com.example.demo.main;
+package spring.product.example.main;
 
 public class ProductMain {
     ProductControler productControler;
