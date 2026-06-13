@@ -28,5 +28,14 @@ public class ProductRepo {
     Optional<Product> getProductById(int id) {
         return this.products.stream().filter(product -> product.getId() == id).findFirst().orElseThrow(() -> new ProductExistsExcption("Product with id " + id + " not found"));
     }
+    Optional<Product> getProductByName(String name) {
+        return this.products.stream().filter(product -> product.getName().equals(name)).findFirst().orElseThrow(() -> new ProductExistsExcption("Product with name " + name + " not found"));
+    }
+    Optional<Product> getProductByCategory(String category) {
+        return this.products.stream().filter(product -> product.getCategory().equals(category)).findFirst().orElseThrow(() -> new ProductExistsExcption("Product with category " + category + " not found"));
+    }
+    void deleteProduct(int id) {
+        this.products.removeIf(product -> product.getId() == id);
+    }
 
 }
