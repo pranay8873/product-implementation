@@ -1,6 +1,10 @@
 package com.product.project.repository;
 
+import com.product.project.Exception.ProductExistsExcption;
+import com.product.project.entity.Product;
+
 import java.util.List;
+import java.util.Optional;
 
 public class ProductRepo {
     Product product;
@@ -13,12 +17,16 @@ public class ProductRepo {
         this.products = products;
     }
     void saveProduct(Product product) {
+        if(this.products.stream().anyMatch(p -> p.getId() == product.getId())) {
+            throw new ProductExistsExcption("Product with id " + product.getId() + " already exists");
+        }
         this.products.add(product);
     }
     List<Product> getAllProducts() {
         return this.products;
     }
-    Product getProductById(int id) {
-        return this.products.stream().filter(product -> product.getId() == id).findFirst().orElse(null);
+    Optional<Product> getProductById(int id) {
+        return this.products.stream().filter(product -> product.getId() == id).findFirst().orElseThrow(() -> new ProductExistsExcption("Product with id " + id + " not found"));
     }
+
 }
