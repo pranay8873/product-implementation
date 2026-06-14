@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
-@Controller
+
 @RestController
 @RequestMapping("/products")
 
@@ -42,11 +42,11 @@ public class ProductCtlr {
         return ResponseEntity.ok(productServ.getAllProducts());
     }
     @PutMapping("/update")
-    public ResponseEntity<Optional<Product>> updateProduct(Product product) {
+    public ResponseEntity<Optional<Product>> updateProduct(@RequestBody Product product) {
         return ResponseEntity.ok(productServ.saveProduct(product));
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<Optional<Product>> updateProductById(@PathVariable int id, Product product) {
+    public ResponseEntity<Optional<Product>> updateProductById(@PathVariable int id, @RequestBody  Product product) {
         return ResponseEntity.ok(productServ.saveProduct(product));
     }
 }
