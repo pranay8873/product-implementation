@@ -1,9 +1,11 @@
 package com.product.project.repository;
 
 import com.product.project.Exception.ProductExistsExcption;
+import com.product.project.Exception.ProductNotFoundExcption;
 import com.product.project.entity.Product;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Repository
@@ -12,7 +14,8 @@ public class ProductRepo {
     private List<Product> products;
 
     public ProductRepo() {
-        this.product = new Product();
+
+        this.products = new ArrayList<>();
     }
     public ProductRepo(List<Product> products) {
         this.products = products;
@@ -28,7 +31,7 @@ public class ProductRepo {
         return this.products;
     }
     public Optional<Product> getProductById(int id) {
-        return Optional.of(this.products.stream().filter(product -> product.getId() == id).findFirst().orElseThrow(() -> new ProductExistsExcption("Product with id " + id + " not found")));
+        return Optional.of(this.products.stream().filter(product -> product.getId() == id).findFirst().orElseThrow(() -> new ProductNotFoundExcption("Product with id " + id + " not found")));
     }
     public Optional<Product> getProductByName(String name) {
         return Optional.of(this.products.stream().filter(product -> product.getName().equals(name)).findFirst().orElseThrow(() -> new ProductExistsExcption("Product with name " + name + " not found")));
