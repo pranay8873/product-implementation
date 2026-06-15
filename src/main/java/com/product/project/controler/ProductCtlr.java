@@ -21,15 +21,15 @@ public class ProductCtlr {
     public ResponseEntity<Product> saveProduct(@RequestBody Product product) throws ProductExistsExcption {
         return ResponseEntity.status(HttpStatus.CREATED).body(productServ.addProduct(product));
     }
-    @RequestMapping("/get/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable int id) {
         return ResponseEntity.ok(productServ.getProductById(id));
     }
-    @RequestMapping("/getByName")
+    @GetMapping("/getByName")
     public ResponseEntity<Optional<Product>> getProductByName(@RequestParam String name) {
         return ResponseEntity.status(HttpStatus.OK).body(Optional.ofNullable(productServ.getProductByName(name)));
     }
-    @RequestMapping("/getByCategory")
+    @GetMapping("/getByCategory")
     public ResponseEntity<List<Product>> getProductByCategory(@RequestParam String category) {
         return ResponseEntity.ok(productServ.getProductByCategory(category));
     }
@@ -46,7 +46,13 @@ public class ProductCtlr {
         return ResponseEntity.ok(Optional.ofNullable(productServ.updateProduct(product)));
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<Optional<Product>> updateProductById(@PathVariable int id, @RequestBody  Product product) {
-        return ResponseEntity.ok(Optional.ofNullable(productServ.updateProduct(product)));
+    public ResponseEntity<Product> updateProductById(
+            @PathVariable int id,
+            @RequestBody Product product) {
+
+        product.setId(id);
+        return ResponseEntity.ok(
+                productServ.updateProduct(product)
+        );
     }
 }

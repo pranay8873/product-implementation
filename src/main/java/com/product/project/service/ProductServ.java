@@ -19,7 +19,7 @@ public class ProductServ implements ProductService {
 
     @Override
     public Product addProduct(Product product) throws ProductExistsExcption {
-        Optional<Product> product1 = productRepo.findByname(product.getName());
+        Optional<Product> product1 = productRepo.findByName(product.getName());
         if(product1.isPresent()) {
             throw new ProductExistsExcption("Product with name " + product.getName() + " already exists");
         }
@@ -29,7 +29,7 @@ public class ProductServ implements ProductService {
 
     @Override
     public Product getProductById(int id) throws ProductNotFoundExcption {
-        Optional<Product> product1 = productRepo.getbyid(id);
+        Optional<Product> product1 = productRepo.findById(id);
         if(product1.isEmpty()) {
             throw new ProductNotFoundExcption("Product with id " + id + " not found");
         }
@@ -38,7 +38,7 @@ public class ProductServ implements ProductService {
     }
     @Override
     public Product getProductByName(String name) throws ProductNotFoundExcption {
-        Optional<Product> product1 = productRepo.findByname(name);
+        Optional<Product> product1 = productRepo.findByName(name);
         if(product1.isEmpty()) {
             throw new ProductNotFoundExcption("Product with name " + name + " not found");
         }
@@ -61,7 +61,7 @@ public class ProductServ implements ProductService {
 
     @Override
     public Product updateProduct(Product product) throws ProductNotFoundExcption {
-        Optional<Product> product1 = productRepo.getbyid(product.getId());
+        Optional<Product> product1 = productRepo.findById(product.getId());
         if(product1.isEmpty()) {
             throw new ProductNotFoundExcption("Product with id " + product.getId() + " not found");
         }
@@ -72,10 +72,10 @@ public class ProductServ implements ProductService {
 
     @Override
     public boolean deleteProduct(int id) throws ProductNotFoundExcption {
-        if(productRepo.getbyid(id).isEmpty()) {
+        if(productRepo.findById(id).isEmpty()) {
             throw new ProductNotFoundExcption("Product with id " + id + " not found");
         }
-        productRepo.delete(productRepo.getbyid(id).get());
+        productRepo.deleteById(id);
         return true;
 
     }
