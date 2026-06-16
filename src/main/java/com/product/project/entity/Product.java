@@ -1,5 +1,7 @@
 package com.product.project.entity;
 
+import com.product.project.enums.Status;
+import com.product.project.enums.Type;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,5 +22,9 @@ public class Product {
     private String image;
     private int quantity;
     private double discount;
+    @Enumerated(EnumType.STRING)
+    private Type type;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
 }
