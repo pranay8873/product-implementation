@@ -1,10 +1,16 @@
 package com.product.project.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Address {
-    String doorNo;
-    String street;
-    String city;
-    String state;
-    String country;
-    String pincode;
+    @Id
+    private int id;
+    private String doorNo;
+    private String street;
+    private String city;
+    private String state;
+    private String country;
+    private String pincode;
 }
