@@ -26,5 +26,8 @@ public class Product {
     private Type type;
     @Enumerated(EnumType.STRING)
     private Status status;
+    @OneToOne( cascade = CascadeType.ALL)
+    @JoinColumn(name = "manfactured_address_id")
+    private Address manfactured_address;
 
 }
