@@ -1,5 +1,6 @@
 package com.product.project.dto;
 
+import com.product.project.entity.Address;
 import com.product.project.enums.Status;
 import com.product.project.enums.Type;
 import jakarta.persistence.EnumType;
@@ -20,4 +21,5 @@ public class ProductUpdateDto {
     private Type type;
     @Enumerated(EnumType.STRING)
     private Status status;
+    private Address manfactured_address;
 }
