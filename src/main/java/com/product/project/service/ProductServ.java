@@ -23,14 +23,19 @@ public class ProductServ implements ProductService {
 
 
     @Override
-    public ProductResponsedto addProduct(ProductRequestdto product) throws ProductExistsExcption {
-        Optional<Product> product1 = productRepo.findByName(product.getName());
-        if(product1.isPresent()) {
-            throw new ProductExistsExcption("Product with name " + product.getName() + " already exists");
-        }
-        Product productentity=modelMapper.map(product, Product.class);
-        return modelMapper.map(productRepo.save(productentity),ProductResponsedto.class);
+    public ProductResponsedto addProduct(ProductRequestdto product) {
 
+        System.out.println("Received DTO = " + product);
+        System.out.println("Address = " + product.getManfactured_address());
+
+        Product productentity = modelMapper.map(product, Product.class);
+
+        System.out.println("Mapped Address = " + productentity.getManfactured_address());
+
+        return modelMapper.map(
+                productRepo.save(productentity),
+                ProductResponsedto.class
+        );
     }
 
     @Override
@@ -79,6 +84,7 @@ public class ProductServ implements ProductService {
         product1.setDiscount(product.getDiscount());
         product1.setType(product.getType());
         product1.setStatus(product.getStatus());
+        product1.setManfactured_address(product.getManfactured_address());
         return modelMapper.map(productRepo.save(product1),ProductResponsedto.class);
     }
 
