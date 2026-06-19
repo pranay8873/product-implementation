@@ -5,6 +5,7 @@ import com.product.project.Exception.ProductNotFoundExcption;
 import com.product.project.dto.ProductRequestdto;
 import com.product.project.dto.ProductResponsedto;
 import com.product.project.dto.ProductUpdateDto;
+import com.product.project.entity.Address;
 import com.product.project.entity.Product;
 import com.product.project.repository.ProductRepo;
 import lombok.RequiredArgsConstructor;
@@ -25,17 +26,19 @@ public class ProductServ implements ProductService {
     @Override
     public ProductResponsedto addProduct(ProductRequestdto product) {
 
-        System.out.println("Received DTO = " + product);
-        System.out.println("Address = " + product.getManfactured_address());
-
         Product productentity = modelMapper.map(product, Product.class);
 
-        System.out.println("Mapped Address = " + productentity.getManfactured_address());
-
-        return modelMapper.map(
-                productRepo.save(productentity),
-                ProductResponsedto.class
+        Address address = modelMapper.map(
+                product.getManfactured_address(),
+                Address.class
         );
+
+        address.setProduct(productentity);
+        productentity.setManfactured_address(address);
+
+        Product savedProduct = productRepo.save(productentity);
+
+        return modelMapper.map(savedProduct, ProductResponsedto.class);
     }
 
     @Override
@@ -84,7 +87,10 @@ public class ProductServ implements ProductService {
         product1.setDiscount(product.getDiscount());
         product1.setType(product.getType());
         product1.setStatus(product.getStatus());
-        product1.setManfactured_address(product.getManfactured_address());
+        product1.setManfactured_address(modelMapper.map(
+                product.getManfactured_address(),
+                Address.class
+        ));
         return modelMapper.map(productRepo.save(product1),ProductResponsedto.class);
     }
 
