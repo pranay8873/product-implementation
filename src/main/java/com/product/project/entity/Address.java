@@ -1,9 +1,6 @@
 package com.product.project.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,12 +12,15 @@ import lombok.NoArgsConstructor;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String doorNo;
     private String street;
     private String city;
     private String state;
     private String country;
     private String pincode;
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
 }
