@@ -20,5 +20,5 @@ public class ProductRequestdto {
     private Type type;
     @Enumerated(EnumType.STRING)
     private Status status;
-    private Address manfactured_address;
+    private addressdto manfactured_address;
 }
