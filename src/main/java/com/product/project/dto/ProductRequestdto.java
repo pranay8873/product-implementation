@@ -7,6 +7,8 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class ProductRequestdto {
     private String name;
@@ -20,5 +22,5 @@ public class ProductRequestdto {
     private Type type;
     @Enumerated(EnumType.STRING)
     private Status status;
-    private addressdto manfactured_address;
+    private List<addressdto> manfactured_address;
 }
