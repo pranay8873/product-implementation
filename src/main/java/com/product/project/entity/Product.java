@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "products")
@@ -26,7 +28,9 @@ public class Product {
     private Type type;
     @Enumerated(EnumType.STRING)
     private Status status;
-    @OneToOne(mappedBy="product",cascade = CascadeType.ALL)
-    private Address manfactured_address;
+//    @OneToOne(mappedBy="product",cascade = CascadeType.ALL)
+//    private Address manfactured_address;
+    @OneToMany(mappedBy="product",cascade = CascadeType.ALL)
+    private List<Address> manfactured_address;
 
 }
