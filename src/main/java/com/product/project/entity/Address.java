@@ -19,7 +19,7 @@ public class Address {
     private String state;
     private String country;
     private String pincode;
-    @OneToOne
+    @ManyToOne(FetchType=FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 
