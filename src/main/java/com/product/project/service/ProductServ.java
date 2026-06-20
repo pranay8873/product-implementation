@@ -28,13 +28,13 @@ public class ProductServ implements ProductService {
 
         Product productentity = modelMapper.map(product, Product.class);
 
-        Address address = modelMapper.map(
-                product.getManfactured_address(),
-                Address.class
-        );
+//        List<Address> address = modelMapper.map(
+//                product.getManfactured_address(),
+//                Address.class
+//        );
 
-        address.setProduct(productentity);
-        productentity.setManfactured_address(address);
+          productentity.getManfactured_address().forEach(address -> address.setProduct(productentity));
+//        productentity.setManfactured_address(address);
 
         Product savedProduct = productRepo.save(productentity);
 
@@ -87,10 +87,11 @@ public class ProductServ implements ProductService {
         product1.setDiscount(product.getDiscount());
         product1.setType(product.getType());
         product1.setStatus(product.getStatus());
-        product1.setManfactured_address(modelMapper.map(
-                product.getManfactured_address(),
-                Address.class
-        ));
+//        product1.setManfactured_address(modelMapper.map(
+//                product.getManfactured_address(),
+//                Address.class
+//        ));
+        product1.getManfactured_address().forEach(address -> address.setProduct(product1));
         return modelMapper.map(productRepo.save(product1),ProductResponsedto.class);
     }
 
